@@ -1,0 +1,9 @@
+{
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "css.lint.unknownAtRules": "ignore",
+    "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]],
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

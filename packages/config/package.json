@@ -1,0 +1,7 @@
+{
+    "name": "@charted/config",
+    "description": "🐻‍❄️🎨 Module to configure illustration",
+    "version": "0.0.0-devel.0",
+    "private": true,
+    "author": "Noelware, LLC. <team@noelware.org>"
+}

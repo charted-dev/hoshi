@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "Vue.vscode-typescript-vue-plugin",
+        "yoavbls.pretty-ts-errors",
+        "ms-azuretools.vscode-docker",
+        "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint",
+        "redhat.vscode-yaml",
+        "antfu.iconify",
+        "Vue.volar"
+    ]
+}

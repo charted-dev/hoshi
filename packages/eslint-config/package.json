@@ -1,0 +1,19 @@
+{
+    "name": "@charted/eslint-config",
+    "description": "🐻‍❄️🎨 ESLint configuration for illustration, which extends @augu/eslint-config",
+    "version": "0.0.0-devel.0",
+    "private": true,
+    "author": "Noelware, LLC. <team@noelware.org>",
+    "files": [
+        "index.js",
+        "vue.js"
+    ],
+    "prettier": "@charted/prettier-config",
+    "devDependencies": {
+        "@augu/eslint-config": "4.0.1",
+        "@charted/prettier-config": "workspace:*",
+        "eslint": "8.38.0",
+        "eslint-config-prettier": "8.8.0",
+        "eslint-plugin-vue": "9.11.0"
+    }
+}

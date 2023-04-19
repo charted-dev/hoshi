@@ -1,0 +1,42 @@
+{
+    "name": "@charted/illustration",
+    "description": "🐻‍❄️🎨 Official web interface to interact with charted-server, made with Vite and Vue",
+    "version": "0.0.0-devel.0",
+    "private": true,
+    "author": "Noelware, LLC. <team@noelware.org>",
+    "repository": "https://github.com/charted-dev/illustration",
+    "bugs": "https://github.com/charted-dev/illustration/issues",
+    "maintainers": [
+        {
+            "email": "cutie@floofy.dev",
+            "name": "Noel Towa",
+            "url": "https://floofy.dev"
+        }
+    ],
+    "scripts": {
+        "build": "pnpm run fmt && pnpm run lint && tsx --tsconfig ./scripts/tsconfig.json ./scripts/build.ts",
+        "lint": "tsx --tsconfig ./scripts/tsconfig.json ./scripts/eslint.ts",
+        "dev": "pnpm run fmt && pnpm run lint && tsx --tsconfig ./scripts/tsconfig.json ./scripts/dev.ts",
+        "fmt": "tsx --tsconfig ./scripts/tsconfig.json ./scripts/prettier.ts"
+    },
+    "devDependencies": {
+        "@actions/core": "^1.10.0",
+        "@augu/eslint-config": "4.0.1",
+        "@augu/tsconfig": "1.1.1",
+        "@types/eslint": "8.37.0",
+        "@types/node": "18.15.11",
+        "@types/prettier": "2.7.2",
+        "@types/signale": "1.4.4",
+        "colorette": "2.0.20",
+        "esbuild": "0.17.17",
+        "eslint": "8.38.0",
+        "eslint-config-prettier": "8.8.0",
+        "globby": "13.1.4",
+        "log-symbols": "5.1.0",
+        "prettier": "2.8.7",
+        "signale": "1.4.0",
+        "tsx": "3.12.6",
+        "typescript": "5.0.4",
+        "vite": "4.2.2"
+    }
+}

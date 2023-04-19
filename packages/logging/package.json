@@ -1,0 +1,7 @@
+{
+    "name": "@charted/logging",
+    "description": "🐻‍❄️🎨 Module to configure server-side logging",
+    "version": "0.0.0-devel.0",
+    "private": true,
+    "author": "Noelware, LLC. <team@noelware.org>"
+}

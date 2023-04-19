@@ -1,0 +1,12 @@
+{
+    "name": "@charted/prettier-config",
+    "description": "🐻‍❄️🎨 Prettier configuration for illustration",
+    "version": "0.0.0-devel.0",
+    "private": true,
+    "author": "Noelware, LLC. <team@noelware.org>",
+    "files": ["index.js"],
+    "prettier": "./index.js",
+    "devDependencies": {
+        "prettier": "2.8.7"
+    }
+}

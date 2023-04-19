@@ -1,0 +1,16 @@
+{
+    "name": "@charted/tsconfig",
+    "description": "🐻‍❄️🎨 Shared TypeScript configuration for all packages and source directories",
+    "version": "0.0.0-devel.0",
+    "private": true,
+    "author": "Noelware, LLC. <team@noelware.org>",
+    "prettier": "@charted/prettier-config",
+    "files": [
+        "tsconfig.json"
+    ],
+    "devDependencies": {
+        "@augu/tsconfig": "1.1.1",
+        "@charted/eslint-config": "workspace:*",
+        "@charted/prettier-config": "workspace:*"
+    }
+}
