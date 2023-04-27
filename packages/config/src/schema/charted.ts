@@ -15,12 +15,19 @@
  * limitations under the License.
  */
 
-import type { Config } from 'tailwindcss';
+import z from 'zod';
 
-const defineConfig = (config: Config) => config;
+/**
+ * Represents the configuration schema for the `charted` configuration block.
+ */
+export type ChartedServerConfigSchema = z.infer<typeof chartedConfigSchema>;
 
-export default defineConfig({
-    content: ['./src/**/*.{ts,js,vue}'],
-    plugins: [],
-    theme: {}
+/**
+ * Represents the configuration schema for the `charted` configuration block.
+ */
+export const chartedConfigSchema = z.object({
+    host: z.string().default('localhost'),
+    port: z.number().min(1024).max(65535).default(3651)
+
+    // TODO(@auguwu): add ssl transport to charted-server
 });

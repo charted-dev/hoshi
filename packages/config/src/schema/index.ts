@@ -15,5 +15,18 @@
  * limitations under the License.
  */
 
-export * as schemas from './schema';
-export * from './Config';
+import { chartedConfigSchema } from './charted';
+import { serverConfigSchema } from './server';
+
+export type * from './charted';
+export type * from './server';
+
+/**
+ * All the available configuration schemas available.
+ */
+const schemas = {
+    charted: chartedConfigSchema,
+    server: serverConfigSchema
+};
+
+export default schemas;

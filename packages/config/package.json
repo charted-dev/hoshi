@@ -1,7 +1,19 @@
 {
     "name": "@charted/config",
-    "description": "🐻‍❄️🎨 Module to configure illustration",
+    "description": "🐻‍❄️🎨 Module to configure the Hoshi web-server",
     "version": "0.0.0-devel.0",
     "private": true,
-    "author": "Noelware, LLC. <team@noelware.org>"
+    "author": "Noelware, LLC. <team@noelware.org>",
+    "prettier": "@charted/prettier-config",
+    "dependencies": {
+        "@noelware/utils": "2.2.1",
+        "js-yaml": "4.1.0",
+        "zod": "3.21.4"
+    },
+    "devDependencies": {
+        "@charted/eslint-config": "workspace:*",
+        "@charted/prettier-config": "workspace:*",
+        "@charted/tsconfig": "workspace:*",
+        "@types/js-yaml": "4.0.5"
+    }
 }

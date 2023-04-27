@@ -1,6 +1,0 @@
-{
-    "extends": ["@charted/eslint-config"],
-    "parserOptions": {
-        "project": "./packages/tailwindcss/tsconfig.json"
-    }
-}

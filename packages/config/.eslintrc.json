@@ -1,0 +1,6 @@
+{
+    "extends": ["@charted/eslint-config"],
+    "parserOptions": {
+        "project": "./packages/config/tsconfig.json"
+    }
+}

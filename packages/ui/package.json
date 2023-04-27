@@ -1,7 +1,0 @@
-{
-    "name": "@charted/ui",
-    "description": "🐻‍❄️🎨 UI components for the @charted/web package, made with Vue",
-    "version": "0.0.0-devel.0",
-    "private": true,
-    "author": "Noelware, LLC. <team@noelware.org>"
-}

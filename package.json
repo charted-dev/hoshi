@@ -1,11 +1,11 @@
 {
-    "name": "@charted/illustration",
+    "name": "@charted/hoshi",
     "description": "🐻‍❄️🎨 Official web interface to interact with charted-server, made with Vite and Vue",
     "version": "0.0.0-devel.0",
     "private": true,
     "author": "Noelware, LLC. <team@noelware.org>",
-    "repository": "https://github.com/charted-dev/illustration",
-    "bugs": "https://github.com/charted-dev/illustration/issues",
+    "repository": "https://github.com/charted-dev/hoshi",
+    "bugs": "https://github.com/charted-dev/hoshi/issues",
     "maintainers": [
         {
             "email": "cutie@floofy.dev",
