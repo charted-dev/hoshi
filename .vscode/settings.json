@@ -3,7 +3,11 @@
     "editor.formatOnSave": true,
     "css.lint.unknownAtRules": "ignore",
     "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]],
+    "typescript.tsdk": "node_modules/typescript/lib",
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.associations": {
+        ".*-version": "plaintext"
     }
 }

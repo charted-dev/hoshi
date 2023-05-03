@@ -23,12 +23,12 @@ import z from 'zod';
 export type ServerConfigSchema = z.infer<typeof serverConfigSchema>;
 
 /**
- * Represents the configuration schema for the `charted` configuration block.
+ * Represents the configuration schema for the `server` configuration block.
  */
 export const serverConfigSchema = z.object({
     host: z.string().default('0.0.0.0'),
     port: z.number().min(1024).max(65535).default(2134),
     headers: z.record(z.string(), z.string())
 
-    // TODO(@auguwu): add ssl transport to charted-server
+    // TODO(@auguwu): add ssl transport to hoshi
 });

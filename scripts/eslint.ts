@@ -25,7 +25,7 @@ import run from './util/run';
 const log = getLogger('eslint');
 
 // list of directories to look for
-const paths = ['packages/**/*.{ts,vue,js}', 'src/**/*.{ts,vue,js}'] as const;
+const paths = ['packages/**/*.{ts,vue,js}'] as const;
 
 run(async () => {
     const eslint = new ESLint({

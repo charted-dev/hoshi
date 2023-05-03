@@ -1,0 +1,11 @@
+metrics:
+  enabled: false
+database:
+  username: charted
+  password: charted
+  host: postgres
+redis:
+  host: redis
+storage:
+  filesystem:
+    directory: /var/lib/noelware/charted/data

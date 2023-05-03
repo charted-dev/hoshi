@@ -15,15 +15,13 @@
  * limitations under the License.
  */
 
+import { DeepPartial, ObjectKeysWithSeperator, KeyToPropType, hasOwnProperty } from '@noelware/utils';
+import { readFile, writeFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import { load, dump } from 'js-yaml';
-import { readFile, writeFile } from 'fs/promises';
 import { resolve } from 'path';
 import schemas from './schema';
 import { z } from 'zod';
-import { DeepPartial, ObjectKeysWithSeperator } from '@noelware/utils';
-import { KeyToPropType } from '@noelware/utils';
-import { OmitUndefinedOrNull } from '@noelware/utils';
 
 const $NotFoundSymbol = Symbol.for('[hoshi]::NotFound');
 const schema = z
@@ -97,28 +95,60 @@ export class Config {
         });
     }
 
-    // static getOrNull<Obj extends ObjectKeysWithSeperator<ConfigSchema>, ReturnType = KeyToPropType<ConfigSchema, Obj>>(
-    //     key: Obj
-    // ): ReturnType | null {
-    //     const nodes = key.split('.');
-    //     let value: any = this.#config;
+    /**
+     * Gets a property from the configuration object, or `null` if it couldn't
+     * be found.
+     *
+     * @param key The dot-notation path to get what configuration value you want
+     * @throws {Error} If this configuration singleton wasn't initialized with `Config.load(Path)`.
+     * @return The value itself, or `null` if it couldn't be fetched.
+     */
+    static getOrNull(key: ObjectKeysWithSeperator<ConfigSchema>): KeyToPropType<ConfigSchema, typeof key> | null {
+        if (!this.#config) throw new Error('You need to call #load() until you can get variables.');
 
-    //     for (const node of nodes) {
-    //         try {
-    //             value = value[node];
-    //         } catch {
-    //             value = $NotFoundSymbol;
-    //             break;
-    //         }
-    //     }
+        const nodes = key.split('.');
+        let value: any = this.#config;
 
-    //     return value === $NotFoundSymbol ? null : value === undefined ? null : value;
-    // }
+        for (const node of nodes) {
+            try {
+                value = hasOwnProperty(value, node) ? value[node] : undefined;
+            } catch {
+                value = $NotFoundSymbol;
+                break;
+            }
+        }
 
-    // static getOrDefault<Obj extends ObjectKeysWithSeperator<ConfigSchema>>(
-    //     key: Obj,
-    //     value: OmitUndefinedOrNull<KeyToPropType<ConfigSchema, Obj>>
-    // ) {
-    //     return this.getOrNull(key) === null ? (value as KeyToPropType<ConfigSchema, Obj>) : this.getOrNull(key)!;
-    // }
+        return [undefined, null, $NotFoundSymbol].includes(value) ? null : value;
+    }
+
+    /**
+     * Grabs a configuration value, or throws a {@link TypeError} if the key couldn't be found.
+     * @param key The key to fetch from
+     * @throws {Error} If the singleton wasn't initialized
+     * @throws {TypeError} If the specified `key` wasn't found.
+     * @returns The configuration value you need.
+     */
+    static get(key: ObjectKeysWithSeperator<ConfigSchema>): NonNullable<KeyToPropType<ConfigSchema, typeof key>> {
+        const value = this.getOrNull(key);
+        if (value === null) {
+            throw new TypeError(`Missing configuration option for key [${key}]`);
+        }
+
+        return value as any;
+    }
+
+    /**
+     * Grabs a configuration value from this singleton, or provides a default value
+     * if the configuration property wasn't found.
+     * @param key The key to fetch from
+     * @param value The default value to use
+     * @throws {Error} If the singleton wasn't initialized
+     * @returns The value that was fetched, or the default one if it couldn't be found.
+     */
+    static getOrDefault(
+        key: ObjectKeysWithSeperator<ConfigSchema>,
+        value: NonNullable<KeyToPropType<ConfigSchema, typeof key>>
+    ): NonNullable<KeyToPropType<ConfigSchema, typeof key>> {
+        return this.getOrNull(key) ?? value;
+    }
 }
