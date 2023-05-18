@@ -1,4 +1,0 @@
-{
-    "extends": ["@charted/tsconfig"],
-    "include": ["**/*.ts"]
-}

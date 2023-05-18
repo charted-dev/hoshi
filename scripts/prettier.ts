@@ -1,5 +1,5 @@
 /*
- * 🐻‍❄️🎨 hoshi: Official web interface to interact with charted-server, made with Vite and Vue
+ * 🐻‍❄️🎨 Hoshi: Official web interface to interact with charted-server, made with Vite and Vue
  * Copyright 2023 Noelware, LLC. <team@noelware.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-import { resolveConfig, format, getFileInfo } from 'prettier';
 import { readFile, writeFile } from 'fs/promises';
 import { relative, resolve } from 'path';
 import { globby } from 'globby';
@@ -28,6 +27,11 @@ const ext = ['.json', '.yaml', '.yml', '.vue', '.js', '.md', '.ts'] as const;
 
 run(async () => {
     log.info('Resolving Prettier configuration...');
+
+    const {
+        format,
+        default: { resolveConfig, getFileInfo }
+    } = await import('prettier');
 
     const config = await resolveConfig(resolve(process.cwd(), '.prettierrc.json'));
     assert(config !== null, ".prettierrc.json doesn't exist?");

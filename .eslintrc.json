@@ -1,12 +1,41 @@
 {
-    "extends": ["prettier"],
+    "extends": ["prettier", "@augu/eslint-config/vue-ts.js"],
     "ignorePatterns": ["*.md", "LICENSE"],
+    "parserOptions": {
+        "extraFileExtensions": [".vue"],
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        // this is only off because of Prettier
+        "vue/singleline-html-element-content-newline": "off",
+        "vue/multi-word-component-names": "off",
+        "vue/max-attributes-per-line": [
+            "error",
+            {
+                "singleline": {
+                    "max": 3
+                },
+                "multiline": {
+                    "max": 1
+                }
+            }
+        ],
+        "vue/html-self-closing": "off",
+        "vue/html-indent": ["error", 4]
+    },
     "overrides": [
         {
             "files": ["./scripts/**/*.ts"],
             "extends": ["prettier", "@augu/eslint-config/ts.js"],
             "parserOptions": {
                 "project": "./scripts/tsconfig.json"
+            }
+        },
+        {
+            "files": ["./server/**/*.ts"],
+            "extends": ["prettier", "@augu/eslint-config/ts.js"],
+            "parserOptions": {
+                "project": "./server/tsconfig.json"
             }
         }
     ]

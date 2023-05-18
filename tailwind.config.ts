@@ -15,15 +15,22 @@
  * limitations under the License.
  */
 
-export default function run<F extends (...args: any[]) => Promise<any>>(
-    func: F,
-    ...args: Parameters<F>
-): ReturnType<Awaited<F>> {
-    // @ts-ignore
-    return func(...args)
-        .then(() => process.exit(0))
-        .catch((ex) => {
-            console.error(ex);
-            process.exit(1);
-        });
-}
+import { type Config } from 'tailwindcss';
+import defaultConfig from 'tailwindcss/defaultConfig';
+
+const defineConfig = (config: Config) => config;
+
+export default defineConfig({
+    darkMode: 'class',
+    content: ['./**/*.{js,ts,vue,html}'],
+    plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Inter', ...(defaultConfig.theme!.fontFamily! as any).sans],
+                mono: ['"JetBrains Mono"', ...(defaultConfig.theme!.fontFamily! as any).mono],
+                serif: ['Cantarell', ...(defaultConfig.theme!.fontFamily! as any).serif]
+            }
+        }
+    }
+});

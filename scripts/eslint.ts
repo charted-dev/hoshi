@@ -1,5 +1,5 @@
 /*
- * 🐻‍❄️🎨 hoshi: Official web interface to interact with charted-server, made with Vite and Vue
+ * 🐻‍❄️🎨 Hoshi: Official web interface to interact with charted-server, made with Vite and Vue
  * Copyright 2023 Noelware, LLC. <team@noelware.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,17 +15,20 @@
  * limitations under the License.
  */
 
-import { relative, resolve } from 'path';
+import { dirname, relative, resolve } from 'path';
 import { warning, error } from '@actions/core';
+import { fileURLToPath } from 'url';
 import { ESLint } from 'eslint';
 import getLogger from './util/log';
 import symbols from 'log-symbols';
 import run from './util/run';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const log = getLogger('eslint');
 
 // list of directories to look for
-const paths = ['packages/**/*.{ts,vue,js}'] as const;
+const paths = ['src/**/*.{ts,vue,js}', 'scripts/**/*.ts'] as const;
 
 run(async () => {
     const eslint = new ESLint({

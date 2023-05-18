@@ -1,6 +1,6 @@
 # 🐻‍❄️🎨 hoshi
 
-> _Official web interface to interact with charted-server, made with [Vue](https://vuejs.org) and [Vite](https://vitejs.dev)_
+> _Official web interface to interact with charted-server, made with [Nuxt.js](https://nuxt.com)_
 
 **hoshi** is the official web interface to easily interact with [charted-server](https://charts.noelware.org) without executing cURL commands yourself with a pretty UI for everything.
 

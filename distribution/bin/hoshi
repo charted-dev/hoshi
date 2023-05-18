@@ -1,0 +1,108 @@
+#!/bin/bash
+
+# 🐻‍❄️🎨 hoshi: Official web interface to interact with charted-server, made with Vite and Vue
+# Copyright 2023 Noelware, LLC. <team@noelware.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+HOSHI_DEBUG=${HOSHI_DEBUG:-no}
+
+fatal() {
+    local message="$*"
+
+    echo "[hoshi][failure] $message"
+    exit 1
+}
+
+join() {
+    local IFS="$1"
+    shift
+
+    echo "$*"
+}
+
+debug() {
+    local message="$*"
+    if ! [[ "${HOSHI_DEBUG}" =~ ^(no|false|0)$ ]]; then
+        echo "[hoshi][debug] $message"
+    fi
+}
+
+BASH_SRC=${BASH_SOURCE[0]}
+while [ -L "$BASH_SRC" ]; do
+    target=$(readlink "$BASH_SRC")
+    if [[ $target == /* ]]; then
+        debug "source [$BASH_SRC] is an absolute symlink to $target"
+        BASH_SRC=$target
+    else
+        dir=$(dirname "$BASH_SRC")
+        debug "source [$BASH_SRC] is a relative symlink to [$target] (relative -> $dir)"
+
+        BASH_SRC=$dir/$target
+    fi
+done
+
+REAL_DIR=$(dirname "$BASH_SRC")
+DIR=$(cd -P "$(dirname "$BASH_SRC")" >/dev/null 2>&1 && pwd)
+if [ "$DIR" != "$REAL_DIR" ]; then
+    debug "Directory [$REAL_DIR] resolves to [$DIR]"
+fi
+
+if ! command node -v > /dev/null; then
+    fatal "Missing \`node\` to use."
+fi
+
+NODE_VERSION=$(node --version | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
+m=$(echo "$NODE_VERSION" | cut -d'.' -f1)
+mi=$(echo "$NODE_VERSION" | cut -d '.' -f2)
+
+if [[ "$m" -lt "18" && "$mi" -lt 16 ]]; then
+    fatal "Hoshi requires Node.js 18.16 or higher, received: $NODE_VERSION"
+fi
+
+debug "Using Node.js $NODE_VERSION"
+
+HOSHI_DISTRIBUTION=${HOSHI_DISTRIBUTION_TYPE:-git}
+RESOLVED_NODE_OPTS=(
+    # enables all source maps (the server emits source maps)
+    "--enable-source-maps"
+
+    # silence all deprecation warnings
+    "--no-deprecation"
+
+    # silence all node warnings
+    "--no-warnings"
+
+    # set process.title = 'hoshi'
+    "--title=hoshi"
+
+    # set memory to ~2GB
+    "--max-old-space-size=1536"
+)
+
+if [ -n "${HOSHI_NODE_OPTS:-}" ]; then
+    debug "Received extra options with \`HOSHI_NODE_OPTS\`: $HOSHI_NODE_OPTS"
+    RESOLVED_NODE_OPTS+=("$HOSHI_NODE_OPTS")
+fi
+
+export NODE_OPTS=$(join ' ' "${RESOLVED_NODE_OPTS[@]}")
+debug "Resolved Node.js options => $NODE_OPTS"
+
+debug "Now launching web server with arguments:"
+debug "$ node $NODE_OPTS dist/server/main.js $@"
+
+node $NODE_OPTS dist/server/main.js "$@"

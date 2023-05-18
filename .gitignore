@@ -743,4 +743,6 @@ FodyWeavers.xsd
 
 .cache/
 config.yml
+/**/.output
 !packages/*
+!distribution/bin/

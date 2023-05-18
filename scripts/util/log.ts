@@ -1,5 +1,5 @@
 /*
- * 🐻‍❄️🎨 illustration: Official web interface to interact with charted-server, made with Vite and Vue
+ * 🐻‍❄️🎨 Hoshi: Official web interface to interact with charted-server, made with Vite and Vue
  * Copyright 2023 Noelware, LLC. <team@noelware.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,15 +15,15 @@
  * limitations under the License.
  */
 
-import { Signale } from 'signale';
+import { tryRequire } from '@noelware/utils';
 
+const { Signale } = tryRequire<typeof import('signale')>('signale');
 export default function getLogger(...paths: string[]) {
     const scope = `charted:web${paths.length ? `:${paths.join(':')}` : ''}`;
 
     return new Signale({
         scope,
         config: {
-            displayFilename: true,
             displayBadge: true,
             displayLabel: true,
             displayDate: true
