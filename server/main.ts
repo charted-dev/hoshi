@@ -14,15 +14,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-export default function run<F extends (...args: any[]) => Promise<any>>(
-    func: F,
-    ...args: Parameters<F>
-): ReturnType<Awaited<F>> {
-    return func(...args)
-        .then(() => process.exit(0))
-        .catch((ex) => {
-            console.error(ex);
-            process.exit(1);
-        }) as ReturnType<Awaited<F>>;
-}

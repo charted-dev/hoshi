@@ -1,5 +1,5 @@
 /*
- * 🐻‍❄️🎨 Hoshi: Official web interface to interact with charted-server, made with Vite and Vue
+ * 🐻‍❄️🎨 hoshi: Official web interface to interact with charted-server, made with Nuxt
  * Copyright 2023 Noelware, LLC. <team@noelware.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
